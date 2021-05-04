@@ -1,0 +1,116 @@
+{
+  "categories": {
+    "id": 3,
+    "parent_id": 1,
+    "name": "tenis",
+    "description": "",
+    "img": "",
+    "is_visible": true,
+    "sort_order": 1,
+    "page_title": "",
+    "meta_keywords": "",
+    "meta_description": ""
+  },
+  "product": {
+    "id": 1,
+    "name": "Air Force 1",
+    "description": "",
+    "price": 123.45,
+    "is_visible": true,
+    "stock": 5,
+    "total_sold": 0,
+    "page_title": "",
+    "meta_keywords": "",
+    "meta_description": "",
+    "order_quantity_minimum": 1,
+    "availability": 1,
+    "categories": [1, 2, 3],
+    "brand": {
+      "id": 1,
+      "name": "Nike",
+      "img": ""
+    },
+    "images": [
+      {
+        "id": 1,
+        "product_id": 1,
+        "img": "a.png",
+        "sort_order": 1
+      }
+    ],
+    "colors": [
+      {
+        "id": 1,
+        "product_id": 1,
+        "color": "131212",
+        "name": "White Blue fish",
+        "sort_order": 1
+      }
+    ]
+  },
+  "user": {
+    "id": 1,
+    "first_name": "Jane",
+    "last_name": "Doe",
+    "email": "janedoe@example.com",
+    "phone_prefix": 244,
+    "phone": 123456789,
+    "img": "",
+    "date_created": "Thu, 11 Jan 2018 20:57:52 +0000",
+    "date_modified": "Tue, 10 Apr 2018 18:59:05 +0000",
+    "store_credit": 0,
+    "registration_ip_address": "12.345.678.910",
+    "notes": "",
+    "addresses": [],
+    "roles": {},
+    "orders": []
+  },
+  "order": {
+    "id": 218,
+    "user": {},
+    "date_created": "Tue, 05 Mar 2019 21:40:11 +0000",
+    "date_modified": "Mon, 11 Mar 2019 15:17:25 +0000",
+    "date_shipped": "",
+    "store_credit_amount": "0.0000",
+    "shipping_cost": 5000,
+    "total": 130,
+    "status": {
+      "status_id": 7,
+      "status": "Awaiting Payment"
+    },
+    "payment": {
+      "payment_method": "Cash",
+      "payment_status": "authorized",
+      "currency": {
+        "currency_id": 2,
+        "currency_code": "USD",
+        "currency_exchange_rate": 629
+      },
+      "default_currency_id": 1,
+      "default_currency_code": "AKZ",
+      "credit_card_type": "BFA"
+    },
+    "ip_address": "",
+    "staff_notes": "",
+    "customer_message": "",
+    "discount_amount": "5.0000",
+    "products": {},
+    "shipping_addresses": {},
+    "coupons": {}
+  },
+  "roles": {{
+    "id": 2,
+    "name": "costumer",
+    "user": {}
+  }},
+  "adress": {
+    "id": 1,
+    "user": {},
+    "adress1": "Bairro Golf 2 Vila Estoril",
+    "adress2": "Bloco 29 apt.2",
+    "city": "Luanda",
+    "country": "Angola",
+    "province": "Luanda",
+    "address_type": "casa"
+  }
+}

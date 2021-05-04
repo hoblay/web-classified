@@ -1,0 +1,165 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id               Int      @id @default(autoincrement())
+  email            String   @unique
+  firstName        String
+  lastName         String
+  password         String
+  phone            String   @unique
+  countyId         Int
+  zip              String
+  isPrivacyEneable Boolean  @default(false)
+  role             Role     @default(USER)
+  language         Language @relation(fields: [languageId], references: [id])
+  languageId       Int
+  posts            Post[]
+}
+
+model Language {
+  id   Int    @id @default(autoincrement())
+  name String
+  User User[]
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model County {
+  id     Int    @id @default(autoincrement())
+  cityId Int
+  name   String
+  city   City   @relation(fields: [cityId], references: [id])
+
+}
+
+model City {
+  id       Int      @id @default(autoincrement())
+  stateId  Int
+  name     String
+  state    State    @relation(fields: [stateId], references: [id])
+  counties County[]
+
+}
+
+model State {
+  id        Int     @id @default(autoincrement())
+  countryId Int
+  name      String
+  cities    City[]
+  country   Country @relation(fields: [countryId], references: [id])
+
+}
+
+model Country {
+  id         Int      @id @default(autoincrement())
+  currencyId Int
+  name       String
+  currency   Currency @relation(fields: [currencyId], references: [id])
+
+  states State[]
+}
+
+model Currency {
+  id           Int       @id @default(autoincrement())
+  code         String    @unique
+  exchangeRate Float
+  Payment      Payment[]
+  countries    Country[]
+}
+
+model Payment {
+  id         Int      @id @default(autoincrement())
+  currencyId Int      @default(1)
+  method     String
+  status     String
+  currency   Currency @relation(fields: [currencyId], references: [id])
+
+}
+
+model Category {
+  id                         Int        @id @default(autoincrement())
+  parentId                   Int?
+  name                       String     @unique
+  maxImgs                    Int
+  postValidityIntervalInDays Int?
+  children                   Category[] @relation("CategoryToCategory")
+  parent                     Category?  @relation(fields: [parentId], references: [id])
+  posts                      Post[]
+  properties                 Property[]
+}
+
+model Property {
+  id              Int              @id @default(autoincrement())
+  categoryId      Int
+  name            String
+  unit            String
+  isMandatory     Boolean
+  values          PossibleValues[]
+  screenControlId Int
+  screenControl   ScreenControl    @relation(fields: [screenControlId], references: [id])
+  Category        Category?        @relation(fields: [categoryId], references: [id])
+}
+
+model PossibleValues {
+  id         Int      @id @default(autoincrement())
+  propertyId Int
+  value      Int
+  property   Property @relation(fields: [propertyId], references: [id])
+}
+
+model ScreenControl {
+  id            Int        @id @default(autoincrement())
+  screenControl String
+  Property      Property[]
+}
+
+model Post {
+  id                Int      @id @default(autoincrement())
+  userId            Int
+  categoryId        Int
+  createdAt         DateTime @default(now())
+  lastRenewedAt     DateTime @default(now())
+  title             String
+  detail            String
+  isActive          Boolean  @default(true)
+  isSeller          Boolean
+  isIndividual      Boolean
+  expectedPrice     Float?
+  isPriceNegotiable Boolean
+  category          Category @relation(fields: [categoryId], references: [id])
+  user              User     @relation(fields: [userId], references: [id])
+  images            Image[]
+}
+
+model Image {
+  id     Int    @id @default(autoincrement())
+  postId Int
+  name   String
+  url    String
+  post   Post   @relation(fields: [postId], references: [id])
+}
+
+model Attribute {
+  id     Int               @id @default(autoincrement())
+  values AttributeValues[]
+}
+
+model AttributeValues {
+  id          Int       @id @default(autoincrement())
+  attributeId Int
+  value       Int
+  attribute   Attribute @relation(fields: [attributeId], references: [id])
+}
