@@ -9,7 +9,7 @@ const {
   deleteLanguage,
 } = require('../controllers/language.controller');
 
-// * api/languages/
+// * api/language/
 router.post('/', createLanguage);
 router.get('/', getLanguages);
 

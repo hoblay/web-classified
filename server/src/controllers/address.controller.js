@@ -8,7 +8,7 @@ async function createCountry(req, res) {
     const newCountry = await prisma.country.create({
       data: {
         name,
-        currencyId,
+        currencyId: Number(currencyId),
       },
     });
     if (newCountry) {
@@ -125,7 +125,7 @@ async function updateCountry(req, res) {
       },
       data: {
         name,
-        currencyId,
+        currencyId: Number(currencyId),
       },
     });
 
@@ -163,7 +163,7 @@ async function createState(req, res) {
     const newState = await prisma.state.create({
       data: {
         name,
-        countryId,
+        countryId: Number(countryId),
       },
     });
     if (newState) {
@@ -271,7 +271,7 @@ async function getStates(req, res) {
 
 async function updateState(req, res) {
   let { id } = req.params;
-  const { name, currencyId } = req.body;
+  const { name, countryId } = req.body;
 
   try {
     const updatedState = await prisma.state.update({
@@ -280,7 +280,7 @@ async function updateState(req, res) {
       },
       data: {
         name,
-        countryId,
+        countryId: Number(countryId),
       },
     });
 
@@ -318,7 +318,7 @@ async function createCity(req, res) {
     const newCity = await prisma.city.create({
       data: {
         name,
-        stateId,
+        stateId: Number(stateId),
       },
     });
     if (newCity) {
@@ -435,7 +435,7 @@ async function updateCity(req, res) {
       },
       data: {
         name,
-        stateId,
+        stateId: Number(stateId),
       },
     });
 
@@ -473,7 +473,7 @@ async function createCounty(req, res) {
     const newCounty = await prisma.county.create({
       data: {
         name,
-        cityId,
+        cityId: Number(cityId),
       },
     });
     if (newCounty) {
@@ -590,7 +590,7 @@ async function updateCounty(req, res) {
       },
       data: {
         name,
-        cityId,
+        cityId: Number(cityId),
       },
     });
 
